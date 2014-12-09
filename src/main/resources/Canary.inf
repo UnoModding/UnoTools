@@ -1,0 +1,4 @@
+name=UnoTools
+main-class=unomodding.minecraft.tools.impl.plugin.UnoCanary
+author=Unomodding
+version=0.1

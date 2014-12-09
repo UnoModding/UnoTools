@@ -1,0 +1,3 @@
+name: UnoTools
+main: unomodding.minecraft.tools.impl.plugin.UnoBukkit
+version: 0.1
