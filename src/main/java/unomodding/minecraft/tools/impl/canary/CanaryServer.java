@@ -24,6 +24,8 @@
  */
 package unomodding.minecraft.tools.impl.canary;
 
+import java.io.File;
+
 import net.canarymod.Canary;
 import net.canarymod.config.Configuration;
 import unomodding.minecraft.tools.Platform;
@@ -51,6 +53,10 @@ public class CanaryServer implements Server {
 
 	public void stopServer() {
 		server.initiateShutdown(null);
+	}
+
+	public File getServerDir() {
+		return Canary.getWorkingDirectory();
 	}
 	
 	public CanaryLogManager getLogManager() {

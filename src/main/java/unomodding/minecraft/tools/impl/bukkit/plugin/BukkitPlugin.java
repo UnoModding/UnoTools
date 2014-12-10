@@ -24,13 +24,17 @@
  */
 package unomodding.minecraft.tools.impl.bukkit.plugin;
 
+import java.io.File;
+
 import unomodding.minecraft.tools.Server;
+import unomodding.minecraft.tools.config.Configuration;
 import unomodding.minecraft.tools.impl.bukkit.BukkitServer;
+import unomodding.minecraft.tools.impl.bukkit.config.BukkitConfiguration;
 import unomodding.minecraft.tools.log.Logger;
-import unomodding.minecraft.tools.plugin.IPlugin;
+import unomodding.minecraft.tools.plugin.PluginInfo;
 import unomodding.minecraft.tools.plugin.Plugin;
 
-public class BukkitPlugin extends org.bukkit.plugin.java.JavaPlugin implements IPlugin {
+public class BukkitPlugin extends org.bukkit.plugin.java.JavaPlugin implements PluginInfo {
 	private BukkitServer server;
 	private Plugin plugin;
 
@@ -49,6 +53,14 @@ public class BukkitPlugin extends org.bukkit.plugin.java.JavaPlugin implements I
 
 	public Logger getUnoLogger() {
 		return server.getLogManager().getLogger(getName());
+	}
+
+	public Configuration getUnoConfiguration() {
+		return new BukkitConfiguration(getConfig());
+	}
+
+	public File getStorageDir() {
+		return getDataFolder();
 	}
 	
 	@Override

@@ -22,20 +22,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package unomodding.minecraft.tools.impl.plugin;
+package unomodding.minecraft.tools.config;
 
-import unomodding.minecraft.tools.plugin.PluginInfo;
-import unomodding.minecraft.tools.plugin.Plugin;
-
-public class UnoPlugin implements Plugin {
-	private PluginInfo plugin;
-
-	public void onEnable(PluginInfo plugin) {
-		this.plugin = plugin;
-		
-	}
-
-	public void onDisable() {
-		
+public class KeyException extends Exception {
+	public KeyException(String key) {
+		super("The key " + key + "doesn't exist!");
 	}
 }

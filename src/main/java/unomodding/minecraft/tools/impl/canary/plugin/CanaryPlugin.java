@@ -24,13 +24,17 @@
  */
 package unomodding.minecraft.tools.impl.canary.plugin;
 
+import java.io.File;
+
 import unomodding.minecraft.tools.Server;
+import unomodding.minecraft.tools.config.Configuration;
 import unomodding.minecraft.tools.impl.canary.CanaryServer;
+import unomodding.minecraft.tools.impl.canary.config.CanaryConfiguration;
 import unomodding.minecraft.tools.log.Logger;
-import unomodding.minecraft.tools.plugin.IPlugin;
+import unomodding.minecraft.tools.plugin.PluginInfo;
 import unomodding.minecraft.tools.plugin.Plugin;
 
-public class CanaryPlugin extends net.canarymod.plugin.Plugin implements IPlugin {
+public class CanaryPlugin extends net.canarymod.plugin.Plugin implements PluginInfo {
 	private CanaryServer server;
 	private Plugin plugin;
 
@@ -45,6 +49,14 @@ public class CanaryPlugin extends net.canarymod.plugin.Plugin implements IPlugin
 
 	public Logger getUnoLogger() {
 		return server.getLogManager().getLogger(getName());
+	}
+
+	public Configuration getUnoConfiguration() {
+		return new CanaryConfiguration(getConfig());
+	}
+
+	public File getStorageDir() {
+		return null; //TODO: how should I go about doing this?
 	}
 
 	@Override

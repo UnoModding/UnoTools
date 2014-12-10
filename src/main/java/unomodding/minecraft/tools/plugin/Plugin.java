@@ -25,6 +25,6 @@
 package unomodding.minecraft.tools.plugin;
 
 public interface Plugin {
-	void onEnable(IPlugin plugin);
+	void onEnable(PluginInfo plugin);
 	void onDisable();
 }

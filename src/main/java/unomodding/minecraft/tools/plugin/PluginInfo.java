@@ -24,6 +24,24 @@
  */
 package unomodding.minecraft.tools.plugin;
 
-public interface PluginManager {
+import java.io.File;
 
+import unomodding.minecraft.tools.Server;
+import unomodding.minecraft.tools.config.Configuration;
+import unomodding.minecraft.tools.log.Logger;
+
+public interface PluginInfo {
+	String getName();
+	String getVersion();
+	
+	Server getUnoServer();
+	Logger getUnoLogger();
+	Configuration getUnoConfiguration();
+	
+	/**
+	 * Returns the storage directory for the plugin.
+	 * 
+	 * @return storage directory
+	 */
+	File getStorageDir();
 }

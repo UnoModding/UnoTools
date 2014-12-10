@@ -24,6 +24,8 @@
  */
 package unomodding.minecraft.tools;
 
+import java.io.File;
+
 import unomodding.minecraft.tools.log.LogManager;
 
 public interface Server {
@@ -33,7 +35,9 @@ public interface Server {
 	
 	int getPort();
 	
-    void stopServer();
+	void stopServer();
+	
+	File getServerDir();
 	
 	LogManager getLogManager();
 }

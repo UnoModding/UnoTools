@@ -24,6 +24,8 @@
  */
 package unomodding.minecraft.tools.impl.bukkit;
 
+import java.io.File;
+
 import org.bukkit.Bukkit;
 
 import unomodding.minecraft.tools.Platform;
@@ -51,6 +53,10 @@ public class BukkitServer implements Server {
 
 	public void stopServer() {
 		server.shutdown();
+	}
+
+	public File getServerDir() {
+		return null; //TODO: how can I go about doing this?
 	}
 	
 	public BukkitLogManager getLogManager() {

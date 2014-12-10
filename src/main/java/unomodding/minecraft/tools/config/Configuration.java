@@ -22,15 +22,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package unomodding.minecraft.tools.plugin;
+package unomodding.minecraft.tools.config;
 
-import unomodding.minecraft.tools.Server;
-import unomodding.minecraft.tools.log.Logger;
-
-public interface IPlugin {
-	String getName();
-	String getVersion();
+public interface Configuration {
+	void setString(String key, String value);
+	void setInt(String key, int value);
+	void setBoolean(String key, boolean value);
 	
-	Server getUnoServer();
-	Logger getUnoLogger();
+	String getString(String key) throws KeyException;
+	String getString(String key, String defaultvalue);
+	int getInt(String key) throws KeyException;
+	int getInt(String key, int defaultvalue);
+	boolean getBoolean(String key) throws KeyException;
+	boolean getBoolean(String key, boolean defaultvalue);
 }
