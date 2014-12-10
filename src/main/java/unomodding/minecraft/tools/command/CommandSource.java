@@ -22,27 +22,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package unomodding.minecraft.tools;
+package unomodding.minecraft.tools.command;
 
-import java.io.File;
+import java.util.List;
 
-import unomodding.minecraft.tools.entity.Player;
-import unomodding.minecraft.tools.log.LogManager;
-
-public interface Server {
-	Platform getPlatform();
-	
-	ServerSettings getServerSettings();
-	
-	String getIP();
-	
-	int getPort();
-	
-	void stopServer();
-	
-	File getServerDir();
-	
-	LogManager getLogManager();
-	
-	Player[] getPlayers();
+public interface CommandSource {
+	void sendMessage(String... messages);
+	void sendMessage(List<String> messages);
 }

@@ -30,17 +30,28 @@ import net.canarymod.Canary;
 import net.canarymod.config.Configuration;
 import unomodding.minecraft.tools.Platform;
 import unomodding.minecraft.tools.Server;
+import unomodding.minecraft.tools.ServerSettings;
+import unomodding.minecraft.tools.entity.Player;
+import unomodding.minecraft.tools.impl.canary.entity.CanaryPlayer;
 import unomodding.minecraft.tools.impl.canary.log.CanaryLogManager;
 
 public class CanaryServer implements Server {
 	private net.canarymod.api.Server server;
+	private CanaryLogManager logManager;
+	private CanaryServerSettings serverSettings;
 	
 	public CanaryServer() {
 		server = Canary.getServer();
+		logManager = new CanaryLogManager();
+		serverSettings = new CanaryServerSettings();
 	}
 	
 	public Platform getPlatform() {
 		return Platform.canary;
+	}
+
+	public ServerSettings getServerSettings() {
+		return serverSettings;
 	}
 
 	public String getIP() {
@@ -60,6 +71,26 @@ public class CanaryServer implements Server {
 	}
 	
 	public CanaryLogManager getLogManager() {
-		return new CanaryLogManager();
+		return logManager;
+	}
+
+	public Player[] getPlayers() {
+		Player[] players = new Player[server.getPlayerList().size()];
+		int i = 0;
+		for(net.canarymod.api.entity.living.humanoid.Player player : server.getPlayerList()) {
+			players[i] = new CanaryPlayer(player);
+			i++;
+		}
+		return players;
+	}
+	
+	private class CanaryServerSettings implements ServerSettings {
+		public boolean isOnlineMode() {
+			return Configuration.getServerConfig().isOnlineMode();
+		}
+
+		public String getMOTD() {
+			return Configuration.getServerConfig().getMotd();
+		}
 	}
 }

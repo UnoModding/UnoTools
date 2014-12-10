@@ -22,27 +22,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package unomodding.minecraft.tools;
+package unomodding.minecraft.tools.impl.bukkit.entity;
 
-import java.io.File;
+import java.util.List;
+import java.util.UUID;
 
+import unomodding.minecraft.tools.entity.EntityType;
 import unomodding.minecraft.tools.entity.Player;
-import unomodding.minecraft.tools.log.LogManager;
 
-public interface Server {
-	Platform getPlatform();
-	
-	ServerSettings getServerSettings();
-	
-	String getIP();
-	
-	int getPort();
-	
-	void stopServer();
-	
-	File getServerDir();
-	
-	LogManager getLogManager();
-	
-	Player[] getPlayers();
+public class BukkitPlayer extends BukkitEntity implements Player {
+	private org.bukkit.entity.Player entity;
+
+	public BukkitPlayer(org.bukkit.entity.Player entity) {
+		super(entity);
+		this.entity = entity;
+	}
+
+	public String getName() {
+		return entity.getName();
+	}
+
+	public void chat(String msg) {
+		entity.chat(msg);
+	}
+
+	public UUID getUUID() {
+		return entity.getUniqueId();
+	}
+
+	public void sendMessage(String... messages) {
+		entity.sendMessage(messages);
+	}
+
+	public void sendMessage(List<String> messages) {
+		for(String msg : messages) {
+			entity.sendMessage(msg);
+		}
+	}
+
+	public EntityType getType() {
+		return EntityType.player;
+	}
 }

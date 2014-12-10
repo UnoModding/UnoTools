@@ -22,27 +22,68 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package unomodding.minecraft.tools;
+package unomodding.minecraft.tools.entity;
 
-import java.io.File;
-
-import unomodding.minecraft.tools.entity.Player;
-import unomodding.minecraft.tools.log.LogManager;
-
-public interface Server {
-	Platform getPlatform();
-	
-	ServerSettings getServerSettings();
-	
-	String getIP();
-	
-	int getPort();
-	
-	void stopServer();
-	
-	File getServerDir();
-	
-	LogManager getLogManager();
-	
-	Player[] getPlayers();
+public enum EntityType {
+	dropped_item,
+	experience_orb,
+	leash_hitch,
+	painting,
+	arrow,
+	snowball,
+	fireball,
+	small_fireball,
+	ender_pearl,
+	ender_signal,
+	thrown_exp_bottle,
+	item_frame,
+	wither_skull,
+	primed_tnt,
+	falling_block,
+	firework,
+	minecart_command,
+	boat,
+	minecart,
+	minecart_chest,
+	minecart_furnace,
+	minecart_tnt,
+	minecart_hopper,
+	minecart_mob_spawner,
+	creeper,
+	skeleton,
+	spider,
+	giant,
+	zombie,
+	slime,
+	ghast,
+	pigzombie,
+	enderman,
+	cave_spider,
+	silverfish,
+	blaze,
+	magma_cube,
+	ender_dragon,
+	wither,
+	bat,
+	witch,
+	pig,
+	sheep,
+	cow,
+	chicken,
+	squid,
+	wolf,
+	mushroom_cow,
+	snowman,
+	ocelot,
+	iron_golem,
+	horse,
+	villager,
+	ender_crystal,
+	splash_potion,
+	egg,
+	fishing_hook,
+	lightining,
+	weather,
+	player,
+	complex_part
 }

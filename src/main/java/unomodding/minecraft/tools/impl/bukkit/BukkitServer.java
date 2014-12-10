@@ -30,17 +30,28 @@ import org.bukkit.Bukkit;
 
 import unomodding.minecraft.tools.Platform;
 import unomodding.minecraft.tools.Server;
+import unomodding.minecraft.tools.ServerSettings;
+import unomodding.minecraft.tools.entity.Player;
+import unomodding.minecraft.tools.impl.bukkit.entity.BukkitPlayer;
 import unomodding.minecraft.tools.impl.bukkit.log.BukkitLogManager;
 
 public class BukkitServer implements Server {
 	private org.bukkit.Server server;
-
+	private BukkitLogManager logManager;
+	private BukkitServerSettings serverSettings;
+	
 	public BukkitServer() {
 		server = Bukkit.getServer();
+		logManager = new BukkitLogManager();
+		serverSettings = new BukkitServerSettings(server);
 	}
 	
 	public Platform getPlatform() {
 		return Platform.bukkit;
+	}
+
+	public ServerSettings getServerSettings() {
+		return serverSettings;
 	}
 
 	public String getIP() {
@@ -60,6 +71,32 @@ public class BukkitServer implements Server {
 	}
 	
 	public BukkitLogManager getLogManager() {
-		return new BukkitLogManager();
+		return logManager;
+	}
+
+	public Player[] getPlayers() {
+		Player[] players = new Player[server.getOnlinePlayers().length];
+		int i = 0;
+		for(org.bukkit.entity.Player player : server.getOnlinePlayers()) {
+			players[i] = new BukkitPlayer(player);
+			i++;
+		}
+		return players;
+	}
+	
+	private class BukkitServerSettings implements ServerSettings {
+		private org.bukkit.Server server;
+
+		public BukkitServerSettings(org.bukkit.Server server) {
+			this.server = server;
+		}
+
+		public boolean isOnlineMode() {
+			return server.getOnlineMode();
+		}
+
+		public String getMOTD() {
+			return server.getMotd();
+		}
 	}
 }

@@ -22,27 +22,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package unomodding.minecraft.tools;
+package unomodding.minecraft.tools.impl.canary.entity;
 
-import java.io.File;
+import java.util.List;
+import java.util.UUID;
 
+import unomodding.minecraft.tools.entity.EntityType;
 import unomodding.minecraft.tools.entity.Player;
-import unomodding.minecraft.tools.log.LogManager;
 
-public interface Server {
-	Platform getPlatform();
-	
-	ServerSettings getServerSettings();
-	
-	String getIP();
-	
-	int getPort();
-	
-	void stopServer();
-	
-	File getServerDir();
-	
-	LogManager getLogManager();
-	
-	Player[] getPlayers();
+public class CanaryPlayer extends CanaryEntity implements Player {
+	private net.canarymod.api.entity.living.humanoid.Player entity;
+
+	public CanaryPlayer(net.canarymod.api.entity.living.humanoid.Player entity) {
+		super(entity);
+		this.entity = entity;
+	}
+
+	public String getName() {
+		return entity.getName();
+	}
+
+	public void chat(String msg) {
+		entity.chat(msg);
+	}
+
+	public UUID getUUID() {
+		return entity.getUUID();
+	}
+
+	public void sendMessage(String... messages) {
+		for(String msg : messages) {
+			entity.message(msg);
+		}
+	}
+
+	public void sendMessage(List<String> messages) {
+		for(String msg : messages) {
+			entity.message(msg);
+		}
+	}
+
+	public EntityType getType() {
+		return EntityType.player;
+	}
 }
