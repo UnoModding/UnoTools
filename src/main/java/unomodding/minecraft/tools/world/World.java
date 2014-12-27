@@ -22,24 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package unomodding.minecraft.tools.impl.bukkit.entity;
+package unomodding.minecraft.tools.world;
 
-import unomodding.minecraft.tools.entity.Entity;
-import unomodding.minecraft.tools.impl.bukkit.BukkitUtils;
-import unomodding.minecraft.tools.world.position.Location;
-
-public abstract class BukkitEntity implements Entity {
-	private org.bukkit.entity.Entity entity;
-
-	public BukkitEntity(org.bukkit.entity.Entity entity) {
-		this.entity = entity;
-	}
-
-	public Location getLocation() {
-		return BukkitUtils.getLocation(entity.getLocation());
-	}
-	
-	public void destroy() {
-		entity.remove();
-	}
+public interface World {
 }

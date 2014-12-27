@@ -25,12 +25,18 @@
 package unomodding.minecraft.tools.impl.canary.entity;
 
 import unomodding.minecraft.tools.entity.Entity;
+import unomodding.minecraft.tools.impl.canary.CanaryUtils;
+import unomodding.minecraft.tools.world.position.Location;
 
 public abstract class CanaryEntity implements Entity {
 	private net.canarymod.api.entity.Entity entity;
 
 	public CanaryEntity(net.canarymod.api.entity.Entity entity) {
 		this.entity = entity;
+	}
+
+	public Location getLocation() {
+		return CanaryUtils.getLocation(entity.getLocation());
 	}
 	
 	public void destroy() {
