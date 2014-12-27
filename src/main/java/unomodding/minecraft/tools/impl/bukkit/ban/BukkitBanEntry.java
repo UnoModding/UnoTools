@@ -22,30 +22,56 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package unomodding.minecraft.tools;
+package unomodding.minecraft.tools.impl.bukkit.ban;
 
-import java.io.File;
+import unomodding.minecraft.tools.ban.BanEntry;
 
-import unomodding.minecraft.tools.ban.BanManager;
-import unomodding.minecraft.tools.entity.Player;
-import unomodding.minecraft.tools.log.LogManager;
+import java.util.Date;
 
-public interface Server {
-	Platform getPlatform();
-	
-	ServerSettings getServerSettings();
-	
-	String getIP();
-	
-	int getPort();
-	
-	void stopServer();
-	
-	File getServerDir();
-	
-	LogManager getLogManager();
+public class BukkitBanEntry implements BanEntry {
+    private final org.bukkit.BanEntry banEntry;
 
-	BanManager getManager(BanManager.BanType type);
-	
-	Player[] getPlayers();
+    public BukkitBanEntry(org.bukkit.BanEntry banEntry) {
+        this.banEntry = banEntry;
+    }
+    
+    public String getTarget() {
+        return banEntry.getTarget();
+    }
+
+    public String getSource() {
+        return banEntry.getSource();
+    }
+
+    public void setSource(String source) {
+        banEntry.setSource(source);
+    }
+
+    public String getReason() {
+        return banEntry.getReason();
+    }
+
+    public void setReason(String reason) {
+        banEntry.setReason(reason);
+    }
+
+    public Date getCreated() {
+        return banEntry.getCreated();
+    }
+
+    public void setCreated(Date created) {
+        banEntry.setCreated(created);
+    }
+
+    public Date getExpiration() {
+        return banEntry.getExpiration();
+    }
+
+    public void setExpiration(Date expiration) {
+        banEntry.setExpiration(expiration);
+    }
+
+    public void save() {
+        banEntry.save();
+    }
 }

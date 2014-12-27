@@ -22,30 +22,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package unomodding.minecraft.tools;
+package unomodding.minecraft.tools.impl.bukkit.ban;
 
-import java.io.File;
-
+import org.bukkit.BanList;
+import unomodding.minecraft.tools.ban.BanEntry;
 import unomodding.minecraft.tools.ban.BanManager;
-import unomodding.minecraft.tools.entity.Player;
-import unomodding.minecraft.tools.log.LogManager;
 
-public interface Server {
-	Platform getPlatform();
-	
-	ServerSettings getServerSettings();
-	
-	String getIP();
-	
-	int getPort();
-	
-	void stopServer();
-	
-	File getServerDir();
-	
-	LogManager getLogManager();
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-	BanManager getManager(BanManager.BanType type);
-	
-	Player[] getPlayers();
+public class BukkitBanManager implements BanManager {
+    private final BanList banList;
+
+    public BukkitBanManager(BanList banList) {
+        this.banList = banList;
+    }
+
+    public BanEntry getEntry(String target) {
+        return new BukkitBanEntry(banList.getBanEntry(target));
+    }
+
+    public Set<BanEntry> getEntries() {
+        Set<BanEntry> banEntries = new HashSet<BanEntry>();
+        for(org.bukkit.BanEntry banEntry : banList.getBanEntries()) {
+            banEntries.add(new BukkitBanEntry(banEntry));
+        }
+        return banEntries;
+    }
+
+    public BanEntry issueBan(String target, String source, String reason, Date expires) {
+        return new BukkitBanEntry(banList.addBan(target, reason, expires, source));
+    }
+
+    public boolean isBanned(String target) {
+        return banList.isBanned(target);
+    }
+
+    public void remove(String target) {
+        banList.pardon(target);
+    }
 }

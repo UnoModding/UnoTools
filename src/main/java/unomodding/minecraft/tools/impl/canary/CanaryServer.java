@@ -31,7 +31,9 @@ import net.canarymod.config.Configuration;
 import unomodding.minecraft.tools.Platform;
 import unomodding.minecraft.tools.Server;
 import unomodding.minecraft.tools.ServerSettings;
+import unomodding.minecraft.tools.ban.BanManager;
 import unomodding.minecraft.tools.entity.Player;
+import unomodding.minecraft.tools.impl.canary.ban.CanaryBanManager;
 import unomodding.minecraft.tools.impl.canary.entity.CanaryPlayer;
 import unomodding.minecraft.tools.impl.canary.log.CanaryLogManager;
 
@@ -72,6 +74,10 @@ public class CanaryServer implements Server {
 	
 	public CanaryLogManager getLogManager() {
 		return logManager;
+	}
+
+	public BanManager getManager(BanManager.BanType type) {
+		return new CanaryBanManager(Canary.bans(), type);
 	}
 
 	public Player[] getPlayers() {

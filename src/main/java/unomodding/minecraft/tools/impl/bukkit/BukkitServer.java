@@ -26,12 +26,15 @@ package unomodding.minecraft.tools.impl.bukkit;
 
 import java.io.File;
 
+import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 
 import unomodding.minecraft.tools.Platform;
 import unomodding.minecraft.tools.Server;
 import unomodding.minecraft.tools.ServerSettings;
+import unomodding.minecraft.tools.ban.BanManager;
 import unomodding.minecraft.tools.entity.Player;
+import unomodding.minecraft.tools.impl.bukkit.ban.BukkitBanManager;
 import unomodding.minecraft.tools.impl.bukkit.entity.BukkitPlayer;
 import unomodding.minecraft.tools.impl.bukkit.log.BukkitLogManager;
 
@@ -72,6 +75,16 @@ public class BukkitServer implements Server {
 	
 	public BukkitLogManager getLogManager() {
 		return logManager;
+	}
+
+	public BanManager getManager(BanManager.BanType type) {
+		switch(type) {
+			case ip:
+				return new BukkitBanManager(server.getBanList(BanList.Type.IP));
+			case name:
+			default:
+				return new BukkitBanManager(server.getBanList(BanList.Type.NAME));
+		}
 	}
 
 	public Player[] getPlayers() {

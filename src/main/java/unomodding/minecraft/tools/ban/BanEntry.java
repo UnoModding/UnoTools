@@ -22,30 +22,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package unomodding.minecraft.tools;
+package unomodding.minecraft.tools.ban;
 
-import java.io.File;
+import java.util.Date;
 
-import unomodding.minecraft.tools.ban.BanManager;
-import unomodding.minecraft.tools.entity.Player;
-import unomodding.minecraft.tools.log.LogManager;
+public interface BanEntry {
+    String getTarget();
 
-public interface Server {
-	Platform getPlatform();
-	
-	ServerSettings getServerSettings();
-	
-	String getIP();
-	
-	int getPort();
-	
-	void stopServer();
-	
-	File getServerDir();
-	
-	LogManager getLogManager();
+    String getSource();
 
-	BanManager getManager(BanManager.BanType type);
-	
-	Player[] getPlayers();
+    void setSource(String source);
+
+    String getReason();
+
+    void setReason(String reason);
+
+    Date getCreated();
+
+    void setCreated(Date created);
+
+    Date getExpiration();
+
+    void setExpiration(Date expiration);
+
+    void save();
 }
